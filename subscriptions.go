@@ -51,7 +51,7 @@ type Subscription struct {
 	InvoiceNumber          int                  `xml:"-"`
 	UUID                   string               `xml:"uuid,omitempty"`
 	State                  string               `xml:"state,omitempty"`
-	UnitAmountInCents      int                  `xml:"unit_amount_in_cents,omitempty"`
+	UnitAmountInCents      int                  `xml:"unit_amount_in_cents"`
 	Currency               string               `xml:"currency,omitempty"`
 	Quantity               int                  `xml:"quantity,omitempty"`
 	TotalAmountInCents     int                  `xml:"total_amount_in_cents,omitempty"`

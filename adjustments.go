@@ -17,6 +17,7 @@ type Adjustment struct {
 	State                  string
 	Description            string
 	AccountingCode         string
+	RevenueScheduleType    string
 	ProductCode            string
 	Origin                 string
 	UnitAmountInCents      int
@@ -43,28 +44,30 @@ type Adjustment struct {
 // with the recurly API.
 func (a Adjustment) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	v := struct {
-		XMLName           xml.Name `xml:"adjustment"`
-		Description       string   `xml:"description,omitempty"`
-		AccountingCode    string   `xml:"accounting_code,omitempty"`
-		ProductCode       string   `xml:"product_code,omitempty"`
-		UnitAmountInCents int      `xml:"unit_amount_in_cents"`
-		Quantity          int      `xml:"quantity,omitempty"`
-		Currency          string   `xml:"currency,omitempty"` // Required for some operations
-		TaxCode           string   `xml:"tax_code,omitempty"`
-		TaxExempt         NullBool `xml:"tax_exempt,omitempty"`
-		StartDate         NullTime `xml:"start_date,omitempty"`
-		EndDate           NullTime `xml:"end_date,omitempty"`
+		XMLName             xml.Name `xml:"adjustment"`
+		Description         string   `xml:"description,omitempty"`
+		AccountingCode      string   `xml:"accounting_code,omitempty"`
+		RevenueScheduleType string   `xml:"revenue_schedule_type,omitempty"`
+		ProductCode         string   `xml:"product_code,omitempty"`
+		UnitAmountInCents   int      `xml:"unit_amount_in_cents"`
+		Quantity            int      `xml:"quantity,omitempty"`
+		Currency            string   `xml:"currency,omitempty"` // Required for some operations
+		TaxCode             string   `xml:"tax_code,omitempty"`
+		TaxExempt           NullBool `xml:"tax_exempt,omitempty"`
+		StartDate           NullTime `xml:"start_date,omitempty"`
+		EndDate             NullTime `xml:"end_date,omitempty"`
 	}{
-		Description:       a.Description,
-		AccountingCode:    a.AccountingCode,
-		ProductCode:       a.ProductCode,
-		UnitAmountInCents: a.UnitAmountInCents,
-		Quantity:          a.Quantity,
-		Currency:          a.Currency,
-		TaxCode:           a.TaxCode,
-		TaxExempt:         a.TaxExempt,
-		StartDate:         a.StartDate,
-		EndDate:           a.EndDate,
+		Description:         a.Description,
+		AccountingCode:      a.AccountingCode,
+		RevenueScheduleType: a.RevenueScheduleType,
+		ProductCode:         a.ProductCode,
+		UnitAmountInCents:   a.UnitAmountInCents,
+		Quantity:            a.Quantity,
+		Currency:            a.Currency,
+		TaxCode:             a.TaxCode,
+		TaxExempt:           a.TaxExempt,
+		StartDate:           a.StartDate,
+		EndDate:             a.EndDate,
 	}
 
 	return e.Encode(v)
@@ -82,6 +85,7 @@ func (a *Adjustment) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error 
 		State                  string      `xml:"state,omitempty"`
 		Description            string      `xml:"description,omitempty"`
 		AccountingCode         string      `xml:"accounting_code,omitempty"`
+		RevenueScheduleType    string      `xml:"revenue_schedule_type,omitempty"`
 		ProductCode            string      `xml:"product_code,omitempty"`
 		Origin                 string      `xml:"origin,omitempty"`
 		UnitAmountInCents      int         `xml:"unit_amount_in_cents"`
@@ -114,6 +118,7 @@ func (a *Adjustment) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error 
 		State:                  v.State,
 		Description:            v.Description,
 		AccountingCode:         v.AccountingCode,
+		RevenueScheduleType:    v.RevenueScheduleType,
 		ProductCode:            v.ProductCode,
 		Origin:                 v.Origin,
 		UnitAmountInCents:      v.UnitAmountInCents,
